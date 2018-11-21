@@ -1,12 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Static Template</title>
   </head>
   <body>
-    <h1>This is a static template, there is no bundler or bundling involved!</h1>
+    <div class="myClass"></div>
+    <button id="jqButton">jquery</button>
+    <ul id="myList"></ul>
+
+    <div id="myVue">
+      <div>{{ myFirstValue }}</div>
+      <button v-on:click="myClick()">Vue Click</button>
+      <ul>
+        <li v-for="listItem in listItems">{{ listItem }}</li>
+      </ul>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.js"
+      integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <script>
+      let myList = ["BMW", "Ford", "Toyota", "Volvo", "Jeep"];
+
+      myList.forEach(value => {
+        $("#myList").append(`<li>${value}</li>`);
+      });
+
+      $(".myClass").html("asdf");
+      $("#jqButton").click(() => {
+        $(".myClass").html("hello jquery!");
+      });
+
+      let app = new Vue({
+        el: "#myVue",
+        data: {
+          listItems: ["BMW1", "Ford", "Toyota", "Volvo", "Jeep"],
+          myFirstValue: "vue value"
+        },
+        methods: {
+          myClick() {
+            this.myFirstValue = "hello vue js!";
+          }
+        }
+      });
+    </script>
   </body>
 </html>
